@@ -25,8 +25,8 @@
   .typo-logo { font-family: var(--font-logo); font-weight: 800; text-transform: uppercase; line-height: 1.1; }
 
   #intro-page { background: var(--bg-white); justify-content: center; align-items: center; text-align: center; padding: 0 10px; }
-  .intro-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: clamp(20px, 8vw, 32px); margin-bottom: 15px; text-align: center; width: 100%; letter-spacing: 0.05em; }
-  @media (min-width: 800px) { .intro-logo { flex-direction: row; gap: 0.3em; font-size: 32px; letter-spacing: 0.1em; white-space: nowrap; } }
+  .intro-logo { display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: clamp(20px, 8vw, 32px); margin-bottom: 40px; text-align: center; width: 100%; letter-spacing: 0.05em; }
+  @media (min-width: 800px) { .intro-logo { flex-direction: row; gap: 0.3em; font-size: 32px; letter-spacing: 0.1em; white-space: nowrap; margin-bottom: 50px; } }
 
   .intro-subtitle { font-size: clamp(10px, 3vw, 13px); color: #888; letter-spacing: 0.25em; margin-bottom: 45px; }
   .btn-ui-main { padding: 18px 50px; background: var(--text-black); border: none; color: #fff; cursor: pointer; font-family: var(--font-ui); font-size: 11px; letter-spacing: 0.2em; font-weight: 700; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease; border-radius: 0; text-transform: uppercase; display: inline-block; }
@@ -49,7 +49,7 @@
   .step-content.active { display: block; animation: slideUp 0.4s ease forwards; }
 
   .step-counter { font-size: 8px; color: #aaa; letter-spacing: 0.3em; margin-bottom: 6px; font-weight: 700; }
-  .step-name { font-family: var(--font-logo); font-size: clamp(18px, 5.5vw, 24px); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.01em; }
+  .step-name { font-family: var(--font-logo); font-size: clamp(20px, 6vw, 24px); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.01em; }
 
   .slider-wrapper { position: relative; padding: 0 5px; width: 100%; height: 60px; display: flex; flex-direction: column; justify-content: center; }
   input[type=range] { -webkit-appearance: none; width: 100%; height: 2px; background: #ddd; outline: none; margin: 10px 0; }
@@ -62,7 +62,7 @@
 
   .color-picker-wrapper { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer; background: conic-gradient(red, yellow, lime, aqua, blue, fuchsia, red); position: relative; overflow: hidden; transition: transform 0.2s; }
   .color-picker-wrapper.active { box-shadow: 0 0 0 3px #f7f7f7, 0 0 0 5px #000; transform: scale(1.1); }
-  .color-picker-wrapper input[type="color"] { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+  .color-picker-wrapper input[type=color] { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; }
 
   .finish-area { position: fixed; bottom: 55px; left: 50%; transform: translateX(-50%); z-index: 1000; width: auto; }
   .btn-regen-mobile { padding: 10px 22px; font-size: 9px; white-space: nowrap; }
@@ -92,7 +92,6 @@
 
 <div id="intro-page" class="page active">
   <div class="intro-logo typo-logo"><span>HORN</span><span>GENERATOR</span></div>
-  <div class="intro-subtitle">Produced By Shachihata Inc.</div>
   <button class="btn-ui-main" onclick="startApp()">START GENERATING</button>
 </div>
 
@@ -117,11 +116,11 @@
           <p class="step-name">HORN COLOR</p>
           <div class="slider-wrapper">
             <div class="color-grid" id="palette-horn">
-              <div class="color-dot" data-color="#ffffff" style="background-color: #ffffff;"></div>
-              <div class="color-dot active" data-color="#d00b1d" style="background-color: #d00b1d;"></div>
+              <div class="color-dot active" data-color="#ffffff" style="background-color: #ffffff;"></div>
+              <div class="color-dot" data-color="#d00b1d" style="background-color: #d00b1d;"></div>
               <div class="color-dot" data-color="#010066" style="background-color: #010066;"></div>
               <div class="color-dot" data-color="#FFD400" style="background-color: #FFD400;"></div>
-              <div class="color-picker-wrapper"><input type="color" id="custom-color-horn" value="#d00b1d"></div>
+              <div class="color-picker-wrapper"><input type="color" id="custom-color-horn" value="#ffffff"></div>
             </div>
             <div class="range-guides" style="visibility: hidden;"><span>-</span><span>-</span></div>
           </div>
@@ -131,11 +130,11 @@
           <p class="step-name">BASE COLOR</p>
           <div class="slider-wrapper">
             <div class="color-grid" id="palette-base">
-              <div class="color-dot" data-color="#ffffff" style="background-color: #ffffff;"></div>
+              <div class="color-dot active" data-color="#ffffff" style="background-color: #ffffff;"></div>
               <div class="color-dot" data-color="#d00b1d" style="background-color: #d00b1d;"></div>
-              <div class="color-dot active" data-color="#010066" style="background-color: #010066;"></div>
+              <div class="color-dot" data-color="#010066" style="background-color: #010066;"></div>
               <div class="color-dot" data-color="#FFD400" style="background-color: #FFD400;"></div>
-              <div class="color-picker-wrapper"><input type="color" id="custom-color-base" value="#010066"></div>
+              <div class="color-picker-wrapper"><input type="color" id="custom-color-base" value="#ffffff"></div>
             </div>
             <div class="range-guides" style="visibility: hidden;"><span>-</span><span>-</span></div>
           </div>
@@ -154,13 +153,13 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { OBJExporter } from "three/addons/exporters/OBJExporter.js";
 
-let settings = { 
-  size: 3, 
-  bend: 3, 
-  bump: 3, 
-  hornColor: "#d00b1d", 
-  baseColor: "#010066" 
-};
+// Fixed base-cylinder dimensions. These are intentionally NOT tied to
+// settings.size / bend / bump — only settings.baseColor may change the base.
+const BASE_RADIUS = 1.15;
+const BASE_HEIGHT = 0.35;
+const BASE_EMBED = 0.15; // how far the horn's bottom sinks into the base
+
+let settings = { size: 3, bend: 3, bump: 3, hornColor: "#ffffff", baseColor: "#ffffff" };
 let dna;
 
 function initDNA() {
@@ -197,50 +196,38 @@ window.downloadModel = () => {
   const exporter = new OBJExporter();
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([exporter.parse(hornGroup)], { type: 'text/plain' }));
-  a.download = 'tsuno_model.obj'; 
-  a.click();
+  a.download = 'tsuno_model.obj'; a.click();
 };
 
 function initThree() {
   const c = document.getElementById("viewer-container");
-  scene = new THREE.Scene(); 
-  scene.background = new THREE.Color(0xffffff);
+  scene = new THREE.Scene(); scene.background = new THREE.Color(0xffffff);
   camera = new THREE.PerspectiveCamera(40, c.clientWidth/c.clientHeight, 0.1, 1000);
   camera.position.set(0, 5, 22);
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(c.clientWidth, c.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   document.getElementById("three-canvas").appendChild(renderer.domElement);
-  
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
-  
-  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
-  const l1 = new THREE.DirectionalLight(0xffffff, 1.2); 
-  l1.position.set(10, 20, 10); 
-  scene.add(l1);
-  const l2 = new THREE.DirectionalLight(0xffffff, 0.4); 
-  l2.position.set(-10, -10, -10); 
-  scene.add(l2);
-
-  hornGroup = new THREE.Group(); 
-  scene.add(hornGroup);
-  
-  animate(); 
-  updateModel();
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const l = new THREE.DirectionalLight(0xffffff, 1.2); l.position.set(10,20,10); scene.add(l);
+  hornGroup = new THREE.Group(); scene.add(hornGroup);
+  animate(); updateModel();
 }
 
-function getMaterial(colorHex) {
+function getNaturalMaterial(colorHex) {
   return new THREE.MeshStandardMaterial({
     color: new THREE.Color(colorHex),
-    roughness: 0.65,
+    roughness: 0.7,
     metalness: 0.05,
     side: THREE.DoubleSide
   });
 }
 
-function createGrowingHorn(startPos = new THREE.Vector3(), scale = 1.0) {
+function createGrowingHorn(startPos = new THREE.Vector3(0, -BASE_EMBED, 0), scale = 1.0) {
   const points = [], segments = 80, radSegs = 24;
+  
   const baseUnitLength = 2.2; 
   const growthLen = settings.size * baseUnitLength * scale;
   const bendStr = Math.pow(settings.bend, 1.6) * 0.45;
@@ -248,19 +235,26 @@ function createGrowingHorn(startPos = new THREE.Vector3(), scale = 1.0) {
   const sX = dna.seed + 1.2;
   const sZ = dna.seed + 2.8;
 
+  // The horn grows perfectly straight (no x/z offset) for this fraction of
+  // its length before any bend is applied. This guarantees the ring at the
+  // very base (t=0) always stays exactly horizontal / parallel to the flat
+  // base disc, no matter how strong the CURVE setting is — otherwise a
+  // strong bend tilts the bottom ring and it no longer sits flush on the base.
+  const BEND_START_T = 0.12;
+
   for (let i = 0; i <= 20; i++) {
     const t = i / 20;
-    const curveProgress = t * baseUnitLength * 3.0; 
+    const bendT = t < BEND_START_T ? 0 : (t - BEND_START_T) / (1 - BEND_START_T);
+    const curveProgress = bendT * baseUnitLength * 3.0; 
     const p = new THREE.Vector3(0, t * growthLen, 0);
     
     const curveX = curveProgress * 0.35 + sX + dna.variationX;
     const curveZ = curveProgress * 0.35 + sZ + dna.variationZ;
     
-    const xOff = Math.sin(curveX) * bendStr * 0.22 * Math.pow(t, 1.3) * 5.0;
-    const zOff = Math.cos(curveZ) * bendStr * 0.22 * Math.pow(t, 1.3) * 5.0;
+    const xOff = Math.sin(curveX) * bendStr * 0.22 * Math.pow(bendT, 1.3) * 5.0;
+    const zOff = Math.cos(curveZ) * bendStr * 0.22 * Math.pow(bendT, 1.3) * 5.0;
     
-    p.x += xOff; 
-    p.z += zOff; 
+    p.x += xOff; p.z += zOff; 
     points.push(p.add(startPos));
   }
   
@@ -270,6 +264,7 @@ function createGrowingHorn(startPos = new THREE.Vector3(), scale = 1.0) {
 
   for (let i = 0; i <= segments; i++) {
     const t = i / segments;
+    
     const bumpAmp = Math.pow(settings.bump, 2.0) * 0.015;
     const noiseIdx = Math.floor(t * 299 * dna.noiseFrequency) % 300;
     const bump = 1.0 + (dna.noiseBase[noiseIdx] - 0.5) * bumpAmp * (1.1 - t);
@@ -293,16 +288,13 @@ function createGrowingHorn(startPos = new THREE.Vector3(), scale = 1.0) {
   }
 
   const bottomCenterIndex = vertices.length / 3;
-  vertices.push(points[0].x, points[0].y, points[0].z); 
-  uvs.push(0.5, 0);
+  vertices.push(points[0].x, points[0].y, points[0].z); uvs.push(0.5, 0);
   for (let j = 0; j < radSegs; j++) {
     indices.push(bottomCenterIndex, j + 1, j);
   }
-  
   const topCenterIndex = vertices.length / 3;
   const tp = curve.getPointAt(1);
-  vertices.push(tp.x, tp.y, tp.z); 
-  uvs.push(0.5, 1);
+  vertices.push(tp.x, tp.y, tp.z); uvs.push(0.5, 1);
   const lastRowOffset = segments * (radSegs + 1);
   for (let j = 0; j < radSegs; j++) {
     indices.push(topCenterIndex, lastRowOffset + j, lastRowOffset + j + 1);
@@ -311,84 +303,79 @@ function createGrowingHorn(startPos = new THREE.Vector3(), scale = 1.0) {
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
   geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-  geo.setIndex(indices); 
-  geo.computeVertexNormals();
-  return { mesh: new THREE.Mesh(geo, getMaterial(settings.hornColor)), curve: curve, frames: frames };
+  geo.setIndex(indices); geo.computeVertexNormals();
+  return { mesh: new THREE.Mesh(geo, getNaturalMaterial(settings.hornColor)), curve: curve, frames: frames };
 }
 
-function createBaseCylinder() {
-  const baseRadius = 1.35;
-  const baseHeight = 0.22;
-  const geo = new THREE.CylinderGeometry(baseRadius, baseRadius, baseHeight, 48);
-  geo.translate(0, -baseHeight / 2, 0);
-  return new THREE.Mesh(geo, getMaterial(settings.baseColor));
+// Thin cylindrical base — fixed radius/height regardless of size/bend/bump.
+// Only its color (settings.baseColor) ever changes.
+function createBase() {
+  const geo = new THREE.CylinderGeometry(BASE_RADIUS, BASE_RADIUS, BASE_HEIGHT, 48);
+  const mesh = new THREE.Mesh(geo, getNaturalMaterial(settings.baseColor));
+  // Top face of the base sits at y = 0, matching the horn's growth origin
+  // (the horn starts slightly below y = 0 so it looks embedded in the base).
+  mesh.position.y = -BASE_HEIGHT / 2;
+  return mesh;
 }
 
 function updateModel() {
   if(!hornGroup) return;
   while(hornGroup.children.length > 0) {
-    const c = hornGroup.children[0]; 
-    c.geometry.dispose(); 
-    c.material.dispose(); 
-    hornGroup.remove(c);
+    const c = hornGroup.children[0]; c.geometry.dispose(); c.material.dispose(); hornGroup.remove(c);
   }
   
-  const root = new THREE.Group();
-  const mainHorn = createGrowingHorn(); 
-  const baseMesh = createBaseCylinder();
+  const main = createGrowingHorn(); 
+  hornGroup.add(main.mesh);
 
-  root.add(mainHorn.mesh);
-  root.add(baseMesh);
-  hornGroup.add(root);
+  const base = createBase();
+  hornGroup.add(base);
   
   const box = new THREE.Box3().setFromObject(hornGroup);
-  const center = new THREE.Vector3(); 
-  box.getCenter(center);
-  root.position.sub(center);
+  const center = new THREE.Vector3(); box.getCenter(center);
+  hornGroup.children.forEach(m => m.position.sub(center));
 }
 
-function animate() { 
-  requestAnimationFrame(animate); 
-  if (controls) controls.update(); 
-  renderer.render(scene, camera); 
-}
+function animate() { requestAnimationFrame(animate); if (controls) controls.update(); renderer.render(scene, camera); }
 
 ['size', 'bend', 'bump'].forEach(id => {
-  document.getElementById('i-' + id).oninput = (e) => { 
-    settings[id] = parseInt(e.target.value); 
-    updateModel(); 
-  };
+  document.getElementById('i-' + id).oninput = (e) => { settings[id] = parseInt(e.target.value); updateModel(); };
 });
 
-function setupPalette(paletteId, customInputId, targetKey) {
-  const palette = document.getElementById(paletteId);
-  const customInput = document.getElementById(customInputId);
-
-  palette.onclick = (e) => {
-    if (e.target.classList.contains('color-dot')) {
-      palette.querySelector('.color-dot.active')?.classList.remove('active');
-      palette.querySelector('.color-picker-wrapper.active')?.classList.remove('active');
-      e.target.classList.add('active');
-      settings[targetKey] = e.target.dataset.color;
-      updateModel();
-    }
-  };
-
-  customInput.oninput = (e) => {
-    palette.querySelector('.color-dot.active')?.classList.remove('active');
-    palette.querySelector('.color-picker-wrapper').classList.add('active');
-    settings[targetKey] = e.target.value; 
+// STEP 04 — Horn color
+document.getElementById('palette-horn').onclick = (e) => {
+  if (e.target.classList.contains('color-dot')) {
+    document.querySelectorAll('#palette-horn .color-dot.active, #palette-horn .color-picker-wrapper.active').forEach(el => el.classList.remove('active'));
+    e.target.classList.add('active');
+    settings.hornColor = e.target.dataset.color;
     updateModel();
-  };
-}
+  }
+};
+document.getElementById('custom-color-horn').oninput = (e) => {
+  document.querySelectorAll('#palette-horn .color-dot.active').forEach(el => el.classList.remove('active'));
+  document.querySelector('#palette-horn .color-picker-wrapper').classList.add('active');
+  settings.hornColor = e.target.value;
+  updateModel();
+};
 
-setupPalette('palette-horn', 'custom-color-horn', 'hornColor');
-setupPalette('palette-base', 'custom-color-base', 'baseColor');
+// STEP 05 — Base color
+document.getElementById('palette-base').onclick = (e) => {
+  if (e.target.classList.contains('color-dot')) {
+    document.querySelectorAll('#palette-base .color-dot.active, #palette-base .color-picker-wrapper.active').forEach(el => el.classList.remove('active'));
+    e.target.classList.add('active');
+    settings.baseColor = e.target.dataset.color;
+    updateModel();
+  }
+};
+document.getElementById('custom-color-base').oninput = (e) => {
+  document.querySelectorAll('#palette-base .color-dot.active').forEach(el => el.classList.remove('active'));
+  document.querySelector('#palette-base .color-picker-wrapper').classList.add('active');
+  settings.baseColor = e.target.value;
+  updateModel();
+};
 
 window.onresize = () => {
   const c = document.getElementById("viewer-container");
-  camera.aspect = c.clientWidth/c.clientHeight; 
-  camera.updateProjectionMatrix();
+  camera.aspect = c.clientWidth/c.clientHeight; camera.updateProjectionMatrix();
   renderer.setSize(c.clientWidth, c.clientHeight);
 };
 </script>
