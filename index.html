@@ -15,6 +15,7 @@
     --border: #e5e5e5;
     --font-ui: 'Helvetica Neue', Arial, sans-serif;
     --font-logo: 'Syne', sans-serif;
+    --bone-white: #ffffff;
   }
   body { background: var(--bg-white); color: var(--text-black); overflow: hidden; height: 100vh; width: 100vw; font-family: var(--font-ui); }
 
@@ -48,29 +49,29 @@
   .step-content.active { display: block; animation: slideUp 0.4s ease forwards; }
 
   .step-counter { font-size: 8px; color: #aaa; letter-spacing: 0.3em; margin-bottom: 6px; font-weight: 700; }
-  .step-name { font-family: var(--font-logo); font-size: clamp(20px, 6vw, 24px); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.01em; }
+  .step-name { font-family: var(--font-logo); font-size: clamp(18px, 5.5vw, 24px); font-weight: 800; margin-bottom: 20px; letter-spacing: -0.01em; }
 
   .slider-wrapper { position: relative; padding: 0 5px; width: 100%; height: 60px; display: flex; flex-direction: column; justify-content: center; }
   input[type=range] { -webkit-appearance: none; width: 100%; height: 2px; background: #ddd; outline: none; margin: 10px 0; }
   input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: #000; border-radius: 50%; cursor: pointer; border: 2px solid #fff; }
   .range-guides { display: flex; justify-content: space-between; margin-top: 0px; font-size: 9px; color: #ccc; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; height: 12px; line-height: 1; }
 
-  /* ── TEXTURE & COLOR PALETTE ── */
-  .color-grid { display: flex; gap: clamp(8px, 3vw, 15px); justify-content: center; align-items: center; height: 44px; margin: 4px 0; }
-  .color-dot { width: 38px; height: 38px; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0,0,0,0.1); position: relative; overflow: hidden; background-size: cover; transition: 0.2s; }
-  .color-dot.active { box-shadow: 0 0 0 3px #fff, 0 0 0 5px #000; transform: scale(1.08); }
-  
-  .p-red { background: radial-gradient(circle at 35% 35%, #ff4b4b, #d61a1a); }
-  .p-bone { background: radial-gradient(circle at 35% 35%, #ffffff, #eae6df); }
-  .p-cow { background: radial-gradient(circle at 25% 25%, #222 18%, transparent 22%), radial-gradient(circle at 75% 70%, #222 25%, transparent 30%), #f4f0e8; }
-  .p-deer { background: linear-gradient(145deg, #a06e3b 10%, #68411d 60%, #eee8dd 95%); }
-  .p-dark { background: radial-gradient(circle at 35% 35%, #444444, #151515); }
+  .color-grid { display: flex; gap: 20px; justify-content: center; align-items: center; height: 44px; margin: 4px 0; }
+  .color-dot { width: 40px; height: 40px; border-radius: 50%; cursor: pointer; border: 1px solid rgba(0,0,0,0.15); position: relative; overflow: hidden; transition: transform 0.2s; }
+  .color-dot.active { box-shadow: 0 0 0 3px #f7f7f7, 0 0 0 5px #000; transform: scale(1.1); }
 
-  .color-picker-wrapper { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer; background: conic-gradient(red, yellow, lime, aqua, blue, fuchsia, red); position: relative; overflow: hidden; }
-  #custom-color { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; }
+  .color-picker-wrapper { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer; background: conic-gradient(red, yellow, lime, aqua, blue, fuchsia, red); position: relative; overflow: hidden; transition: transform 0.2s; }
+  .color-picker-wrapper.active { box-shadow: 0 0 0 3px #f7f7f7, 0 0 0 5px #000; transform: scale(1.1); }
+  .color-picker-wrapper input[type="color"] { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; }
 
-  .finish-area { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 1000; width: auto; }
+  .finish-area { position: fixed; bottom: 55px; left: 50%; transform: translateX(-50%); z-index: 1000; width: auto; }
   .btn-regen-mobile { padding: 10px 22px; font-size: 9px; white-space: nowrap; }
+
+  @media (max-width: 799px) {
+    .color-grid { gap: 15px; }
+    .color-dot { width: 32px; height: 32px; }
+    .color-picker-wrapper { width: 32px; height: 32px; }
+  }
 
   @media (min-width: 800px) {
     #steps-container { max-width: 400px; margin-top: 15px; }
@@ -80,7 +81,7 @@
     .step-nav { gap: 80px; } 
     .nav-arrow { width: 54px; height: 54px; font-size: 18px; }
     #step-panel { padding-top: 22px; height: 280px; } 
-    .finish-area { position: absolute; bottom: 35px; right: 40px; left: auto; transform: none; width: auto; }
+    .finish-area { position: absolute; bottom: 35px; right: 40px; left: auto; transform: none; }
     .btn-regen-mobile { padding: 14px 44px; font-size: 10px; }
     .header-logo { top: 25px; left: 30px; }
     .download-area { top: 25px; right: 40px; }
@@ -110,17 +111,31 @@
       <div id="steps-container">
         <div class="step-content active"><p class="step-counter">STEP 01 / 05</p><p class="step-name">SIZE</p><div class="slider-wrapper"><input id="i-size" type="range" min="1" max="5" value="3"><div class="range-guides"><span>Short</span><span>Long</span></div></div></div>
         <div class="step-content"><p class="step-counter">STEP 02 / 05</p><p class="step-name">CURVE</p><div class="slider-wrapper"><input id="i-bend" type="range" min="1" max="5" value="3"><div class="range-guides"><span>Straight</span><span>Curved</span></div></div></div>
-        <div class="step-content"><p class="step-counter">STEP 03 / 05</p><p class="step-name">BUMP</p><div class="slider-wrapper"><input id="i-bump" type="range" min="1" max="5" value="2"><div class="range-guides"><span>Smooth</span><span>Rough</span></div></div></div>
-        <div class="step-content"><p class="step-counter">STEP 04 / 05</p><p class="step-name">BRANCHES</p><div class="slider-wrapper"><input id="i-branch" type="range" min="0" max="2" value="0"><div class="range-guides"><span>0</span><span>2</span></div></div></div>
-        <div class="step-content"><p class="step-counter">STEP 05 / 05</p><p class="step-name">TEXTURE</p>
+        <div class="step-content"><p class="step-counter">STEP 03 / 05</p><p class="step-name">BUMP</p><div class="slider-wrapper"><input id="i-bump" type="range" min="1" max="5" value="3"><div class="range-guides"><span>Smooth</span><span>Rough</span></div></div></div>
+        <div class="step-content">
+          <p class="step-counter">STEP 04 / 05</p>
+          <p class="step-name">HORN COLOR</p>
           <div class="slider-wrapper">
-            <div class="color-grid" id="palette">
-              <div class="color-dot active p-red" data-pattern="red"></div>
-              <div class="color-dot p-bone" data-pattern="bone"></div>
-              <div class="color-dot p-cow" data-pattern="cow"></div>
-              <div class="color-dot p-deer" data-pattern="deer"></div>
-              <div class="color-dot p-dark" data-pattern="dark"></div>
-              <div class="color-picker-wrapper"><input type="color" id="custom-color" value="#e62020"></div>
+            <div class="color-grid" id="palette-horn">
+              <div class="color-dot" data-color="#ffffff" style="background-color: #ffffff;"></div>
+              <div class="color-dot active" data-color="#d00b1d" style="background-color: #d00b1d;"></div>
+              <div class="color-dot" data-color="#010066" style="background-color: #010066;"></div>
+              <div class="color-dot" data-color="#FFD400" style="background-color: #FFD400;"></div>
+              <div class="color-picker-wrapper"><input type="color" id="custom-color-horn" value="#d00b1d"></div>
+            </div>
+            <div class="range-guides" style="visibility: hidden;"><span>-</span><span>-</span></div>
+          </div>
+        </div>
+        <div class="step-content">
+          <p class="step-counter">STEP 05 / 05</p>
+          <p class="step-name">BASE COLOR</p>
+          <div class="slider-wrapper">
+            <div class="color-grid" id="palette-base">
+              <div class="color-dot" data-color="#ffffff" style="background-color: #ffffff;"></div>
+              <div class="color-dot" data-color="#d00b1d" style="background-color: #d00b1d;"></div>
+              <div class="color-dot active" data-color="#010066" style="background-color: #010066;"></div>
+              <div class="color-dot" data-color="#FFD400" style="background-color: #FFD400;"></div>
+              <div class="color-picker-wrapper"><input type="color" id="custom-color-base" value="#010066"></div>
             </div>
             <div class="range-guides" style="visibility: hidden;"><span>-</span><span>-</span></div>
           </div>
@@ -139,8 +154,27 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { OBJExporter } from "three/addons/exporters/OBJExporter.js";
 
-let settings = { size: 3, bend: 3, bump: 2, branch: 0, color: "#e62020", pattern: "red" };
-let dna = { seed: Math.random() * 100, noise: Array.from({length: 150}, () => Math.random()) };
+let settings = { 
+  size: 3, 
+  bend: 3, 
+  bump: 3, 
+  hornColor: "#d00b1d", 
+  baseColor: "#010066" 
+};
+let dna;
+
+function initDNA() {
+  const r1 = Math.random(), r2 = Math.random(), r3 = Math.random();
+  dna = {
+    seed: Math.random() * 500,
+    variationX: (r1 * 2.5 - 1.25),
+    variationZ: (r2 * 2.5 - 1.25),
+    noiseFrequency: 1.5 + r3 * 3.0, 
+    noiseBase: Array.from({ length: 300 }, () => Math.random())
+  };
+}
+initDNA();
+
 let scene, camera, renderer, controls, hornGroup, currentStep = 0;
 
 window.startApp = () => {
@@ -158,24 +192,21 @@ window.changeStep = (dir) => {
   document.getElementById('next-btn').classList.toggle('disabled', currentStep === steps.length - 1);
 };
 
-window.newDNA = () => {
-  dna.seed = Math.random() * 100;
-  dna.noise = Array.from({length: 150}, () => Math.random());
-  updateModel();
-};
-
+window.newDNA = () => { initDNA(); updateModel(); };
 window.downloadModel = () => {
   const exporter = new OBJExporter();
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([exporter.parse(hornGroup)], { type: 'text/plain' }));
-  a.download = 'tsuno_model.obj'; a.click();
+  a.download = 'tsuno_model.obj'; 
+  a.click();
 };
 
 function initThree() {
   const c = document.getElementById("viewer-container");
-  scene = new THREE.Scene(); scene.background = new THREE.Color(0xffffff);
-  camera = new THREE.PerspectiveCamera(38, c.clientWidth/c.clientHeight, 0.1, 1000);
-  camera.position.set(0, 4, 18);
+  scene = new THREE.Scene(); 
+  scene.background = new THREE.Color(0xffffff);
+  camera = new THREE.PerspectiveCamera(40, c.clientWidth/c.clientHeight, 0.1, 1000);
+  camera.position.set(0, 5, 22);
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(c.clientWidth, c.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -184,156 +215,97 @@ function initThree() {
   controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   
-  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-  const l1 = new THREE.DirectionalLight(0xffffff, 1.2); l1.position.set(12, 20, 15); scene.add(l1);
-  const l2 = new THREE.DirectionalLight(0xffffff, 0.5); l2.position.set(-10, 8, -10); scene.add(l2);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+  const l1 = new THREE.DirectionalLight(0xffffff, 1.2); 
+  l1.position.set(10, 20, 10); 
+  scene.add(l1);
+  const l2 = new THREE.DirectionalLight(0xffffff, 0.4); 
+  l2.position.set(-10, -10, -10); 
+  scene.add(l2);
 
-  hornGroup = new THREE.Group(); scene.add(hornGroup);
-  animate(); updateModel();
+  hornGroup = new THREE.Group(); 
+  scene.add(hornGroup);
+  
+  animate(); 
+  updateModel();
 }
 
-function getTextureMaterial() {
-  const mat = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(settings.color),
-    roughness: 0.35, 
-    metalness: 0.05
+function getMaterial(colorHex) {
+  return new THREE.MeshStandardMaterial({
+    color: new THREE.Color(colorHex),
+    roughness: 0.65,
+    metalness: 0.05,
+    side: THREE.DoubleSide
   });
-
-  mat.onBeforeCompile = (shader) => {
-    shader.uniforms.uPattern = { value: ["red", "bone", "cow", "deer", "dark"].indexOf(settings.pattern) };
-    shader.uniforms.uSeed = { value: dna.seed };
-    shader.uniforms.uCustomColor = { value: new THREE.Color(settings.color) };
-    
-    shader.vertexShader = `
-      varying vec3 vWorldPos;
-      varying float vT;
-      ${shader.vertexShader}
-    `.replace('#include <begin_vertex>', `
-      #include <begin_vertex>
-      vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
-      vT = uv.y;
-    `);
-
-    shader.fragmentShader = `
-      varying vec3 vWorldPos;
-      varying float vT;
-      uniform int uPattern;
-      uniform float uSeed;
-      uniform vec3 uCustomColor;
-
-      float hash(vec3 p) {
-        p = fract(p * 0.3183099 + .1);
-        p *= 17.0;
-        return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
-      }
-
-      float noise(vec3 x) {
-        vec3 i = floor(x); vec3 f = fract(x);
-        f = f*f*(3.0-2.0*f);
-        return mix(mix(mix(hash(i+vec3(0,0,0)), hash(i+vec3(1,0,0)),f.x),
-                   mix(hash(i+vec3(0,1,0)), hash(i+vec3(1,1,0)),f.x),f.y),
-               mix(mix(hash(i+vec3(0,0,1)), hash(i+vec3(1,0,1)),f.x),
-                   mix(hash(i+vec3(0,1,1)), hash(i+vec3(1,1,1)),f.x),f.y),f.z);
-      }
-
-      ${shader.fragmentShader}
-    `.replace('#include <color_fragment>', `
-      #include <color_fragment>
-      vec3 finalCol = uCustomColor;
-
-      if(uPattern == 0) { // Red Solid (Product Default)
-        finalCol = vec3(0.92, 0.12, 0.12);
-      }
-      else if(uPattern == 1) { // Bone
-        vec3 bone = vec3(0.98, 0.96, 0.93);
-        vec3 tan = vec3(0.89, 0.84, 0.76);
-        finalCol = mix(bone, tan, noise(vWorldPos * 0.8 + uSeed));
-      }
-      else if(uPattern == 2) { // Cow Spots
-        vec3 bone = vec3(0.96, 0.94, 0.90);
-        float n = noise(vWorldPos * 0.5 + uSeed * 1.5);
-        float s = smoothstep(0.47, 0.53, n);
-        vec3 spot = mix(vec3(0.18, 0.14, 0.10), vec3(0.04), smoothstep(0.48, 0.52, n));
-        finalCol = mix(spot, bone, s);
-      }
-      else if(uPattern == 3) { // Deer Horn
-        vec3 darkBrown = vec3(0.38, 0.22, 0.12);
-        vec3 lightTan = vec3(0.94, 0.90, 0.84);
-        vec3 deerBase = mix(darkBrown, lightTan, pow(vT, 0.8) * 1.2);
-        finalCol = mix(deerBase * 0.88, deerBase, noise(vWorldPos * 1.8 + uSeed));
-      }
-      else if(uPattern == 4) { // Dark Horn
-        finalCol = mix(vec3(0.08, 0.08, 0.07), vec3(0.24, 0.23, 0.21), vT);
-        finalCol *= (0.92 + 0.16 * noise(vWorldPos * 2.2));
-      }
-
-      diffuseColor.rgb = finalCol;
-    `);
-  };
-  return mat;
 }
 
-function createSolidHorn(isBranch = false, startPos = new THREE.Vector3(), scale = 1.0, bAngle = 0) {
-  const points = [], segments = 90, radSegs = 32;
-  const len = settings.size * 1.6 * scale;
-  const bendStrength = settings.bend * 0.55;
+function createGrowingHorn(startPos = new THREE.Vector3(), scale = 1.0) {
+  const points = [], segments = 80, radSegs = 24;
+  const baseUnitLength = 2.2; 
+  const growthLen = settings.size * baseUnitLength * scale;
+  const bendStr = Math.pow(settings.bend, 1.6) * 0.45;
+  
+  const sX = dna.seed + 1.2;
+  const sZ = dna.seed + 2.8;
 
-  for (let i = 0; i <= 12; i++) {
-    const t = i / 12;
-    const curveExp = Math.pow(t, 1.35);
-    let v = new THREE.Vector3(
-      Math.sin(curveExp * 1.8) * bendStrength * len * 0.45,
-      t * len,
-      Math.cos(curveExp * 1.8 + dna.seed) * (bendStrength * 0.15) * len * 0.3
-    );
-
-    if (isBranch) {
-      const q = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), bAngle);
-      v.applyQuaternion(q);
-    }
-    points.push(v.add(startPos));
+  for (let i = 0; i <= 20; i++) {
+    const t = i / 20;
+    const curveProgress = t * baseUnitLength * 3.0; 
+    const p = new THREE.Vector3(0, t * growthLen, 0);
+    
+    const curveX = curveProgress * 0.35 + sX + dna.variationX;
+    const curveZ = curveProgress * 0.35 + sZ + dna.variationZ;
+    
+    const xOff = Math.sin(curveX) * bendStr * 0.22 * Math.pow(t, 1.3) * 5.0;
+    const zOff = Math.cos(curveZ) * bendStr * 0.22 * Math.pow(t, 1.3) * 5.0;
+    
+    p.x += xOff; 
+    p.z += zOff; 
+    points.push(p.add(startPos));
   }
-
+  
   const curve = new THREE.CatmullRomCurve3(points);
-  const baseR = (isBranch ? 0.32 : 0.62) * (settings.size * 0.05 + 0.95);
+  const pRadius = 0.6 * (settings.size * 0.08 + 0.9);
   const vertices = [], indices = [], uvs = [], frames = curve.computeFrenetFrames(segments, false);
 
   for (let i = 0; i <= segments; i++) {
     const t = i / segments;
-    const bumpFactor = (settings.bump - 1) * 0.015;
-    const bump = 1 + (dna.noise[i % 120] - 0.5) * bumpFactor * (1.0 - t * 0.5);
-    const r = Math.max(0.01, baseR * Math.pow(1.0 - t, 0.88) * bump);
-
-    const p = curve.getPointAt(t);
-    const n = frames.normals[i], b = frames.binormals[i];
-
+    const bumpAmp = Math.pow(settings.bump, 2.0) * 0.015;
+    const noiseIdx = Math.floor(t * 299 * dna.noiseFrequency) % 300;
+    const bump = 1.0 + (dna.noiseBase[noiseIdx] - 0.5) * bumpAmp * (1.1 - t);
+    
+    const r = Math.max(0.01, pRadius * Math.pow(1.0 - t, 0.9) * bump);
+    
+    const p = curve.getPointAt(t), n = frames.normals[i], b = frames.binormals[i];
     for (let j = 0; j <= radSegs; j++) {
       const a = (j / radSegs) * Math.PI * 2;
-      const v = new THREE.Vector3().copy(p).add(n.clone().multiplyScalar(Math.cos(a) * r)).add(b.clone().multiplyScalar(Math.sin(a) * r));
+      const v = new THREE.Vector3().copy(p).add(n.clone().multiplyScalar(Math.cos(a)*r)).add(b.clone().multiplyScalar(Math.sin(a)*r));
       vertices.push(v.x, v.y, v.z);
-      uvs.push(j / radSegs, t);
+      uvs.push(j/radSegs, t);
     }
   }
 
   for (let i = 0; i < segments; i++) {
     for (let j = 0; j < radSegs; j++) {
-      const a = i * (radSegs + 1) + j, b = (i + 1) * (radSegs + 1) + j;
-      const c = (i + 1) * (radSegs + 1) + (j + 1), d = i * (radSegs + 1) + (j + 1);
+      const a = i*(radSegs+1)+j, b = (i+1)*(radSegs+1)+j, c = (i+1)*(radSegs+1)+(j+1), d = i*(radSegs+1)+(j+1);
       indices.push(a, b, d, b, c, d);
     }
   }
 
-  const tipIdx = vertices.length / 3;
-  const tipP = curve.getPointAt(1);
-  vertices.push(tipP.x, tipP.y, tipP.z); uvs.push(0.5, 1);
-  const lastRing = segments * (radSegs + 1);
-  for (let j = 0; j < radSegs; j++) indices.push(tipIdx, lastRing + j + 1, lastRing + j);
-
-  if (!isBranch) {
-    const baseIdx = vertices.length / 3;
-    const baseP = curve.getPointAt(0);
-    vertices.push(baseP.x, baseP.y, baseP.z); uvs.push(0.5, 0);
-    for (let j = 0; j < radSegs; j++) indices.push(baseIdx, j, j + 1);
+  const bottomCenterIndex = vertices.length / 3;
+  vertices.push(points[0].x, points[0].y, points[0].z); 
+  uvs.push(0.5, 0);
+  for (let j = 0; j < radSegs; j++) {
+    indices.push(bottomCenterIndex, j + 1, j);
+  }
+  
+  const topCenterIndex = vertices.length / 3;
+  const tp = curve.getPointAt(1);
+  vertices.push(tp.x, tp.y, tp.z); 
+  uvs.push(0.5, 1);
+  const lastRowOffset = segments * (radSegs + 1);
+  for (let j = 0; j < radSegs; j++) {
+    indices.push(topCenterIndex, lastRowOffset + j, lastRowOffset + j + 1);
   }
 
   const geo = new THREE.BufferGeometry();
@@ -341,73 +313,82 @@ function createSolidHorn(isBranch = false, startPos = new THREE.Vector3(), scale
   geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
   geo.setIndex(indices); 
   geo.computeVertexNormals();
-
-  return { mesh: new THREE.Mesh(geo, getTextureMaterial()), curve: curve };
+  return { mesh: new THREE.Mesh(geo, getMaterial(settings.hornColor)), curve: curve, frames: frames };
 }
 
-function createPedicleRing() {
-  const geo = new THREE.CylinderGeometry(0.85, 0.88, 0.16, 40);
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0x1d4ed8, 
-    roughness: 0.3,
-    metalness: 0.1
-  });
-  const ring = new THREE.Mesh(geo, mat);
-  ring.position.set(0, -0.08, 0);
-  return ring;
+function createBaseCylinder() {
+  const baseRadius = 1.35;
+  const baseHeight = 0.22;
+  const geo = new THREE.CylinderGeometry(baseRadius, baseRadius, baseHeight, 48);
+  geo.translate(0, -baseHeight / 2, 0);
+  return new THREE.Mesh(geo, getMaterial(settings.baseColor));
 }
 
 function updateModel() {
-  if (!hornGroup) return;
-  while (hornGroup.children.length > 0) {
+  if(!hornGroup) return;
+  while(hornGroup.children.length > 0) {
     const c = hornGroup.children[0]; 
-    if (c.geometry) c.geometry.dispose(); 
+    c.geometry.dispose(); 
+    c.material.dispose(); 
     hornGroup.remove(c);
   }
+  
+  const root = new THREE.Group();
+  const mainHorn = createGrowingHorn(); 
+  const baseMesh = createBaseCylinder();
 
-  const main = createSolidHorn();
-  hornGroup.add(main.mesh);
-  hornGroup.add(createPedicleRing());
-
-  if (settings.branch >= 1) {
-    const b1Pos = main.curve.getPointAt(0.35);
-    hornGroup.add(createSolidHorn(true, b1Pos, 0.5, 0.55).mesh);
-  }
-  if (settings.branch >= 2) {
-    const b2Pos = main.curve.getPointAt(0.65);
-    hornGroup.add(createSolidHorn(true, b2Pos, 0.38, 0.7).mesh);
-  }
-
+  root.add(mainHorn.mesh);
+  root.add(baseMesh);
+  hornGroup.add(root);
+  
   const box = new THREE.Box3().setFromObject(hornGroup);
-  const center = new THREE.Vector3(); box.getCenter(center);
-  hornGroup.children.forEach(m => m.position.sub(center));
+  const center = new THREE.Vector3(); 
+  box.getCenter(center);
+  root.position.sub(center);
 }
 
-function animate() { requestAnimationFrame(animate); if (controls) controls.update(); renderer.render(scene, camera); }
+function animate() { 
+  requestAnimationFrame(animate); 
+  if (controls) controls.update(); 
+  renderer.render(scene, camera); 
+}
 
-['size', 'bend', 'bump', 'branch'].forEach(id => {
-  document.getElementById('i-' + id).oninput = (e) => { settings[id] = parseInt(e.target.value); updateModel(); };
+['size', 'bend', 'bump'].forEach(id => {
+  document.getElementById('i-' + id).oninput = (e) => { 
+    settings[id] = parseInt(e.target.value); 
+    updateModel(); 
+  };
 });
 
-document.getElementById('palette').onclick = (e) => {
-  if (e.target.classList.contains('color-dot')) {
-    document.querySelector('.color-dot.active')?.classList.remove('active');
-    e.target.classList.add('active');
-    settings.pattern = e.target.dataset.pattern;
-    updateModel();
-  }
-};
+function setupPalette(paletteId, customInputId, targetKey) {
+  const palette = document.getElementById(paletteId);
+  const customInput = document.getElementById(customInputId);
 
-document.getElementById('custom-color').oninput = (e) => {
-  document.querySelector('.color-dot.active')?.classList.remove('active');
-  settings.pattern = 'custom'; 
-  settings.color = e.target.value; 
-  updateModel();
-};
+  palette.onclick = (e) => {
+    if (e.target.classList.contains('color-dot')) {
+      palette.querySelector('.color-dot.active')?.classList.remove('active');
+      palette.querySelector('.color-picker-wrapper.active')?.classList.remove('active');
+      e.target.classList.add('active');
+      settings[targetKey] = e.target.dataset.color;
+      updateModel();
+    }
+  };
+
+  customInput.oninput = (e) => {
+    palette.querySelector('.color-dot.active')?.classList.remove('active');
+    palette.querySelector('.color-picker-wrapper').classList.add('active');
+    settings[targetKey] = e.target.value; 
+    updateModel();
+  };
+}
+
+setupPalette('palette-horn', 'custom-color-horn', 'hornColor');
+setupPalette('palette-base', 'custom-color-base', 'baseColor');
 
 window.onresize = () => {
   const c = document.getElementById("viewer-container");
-  camera.aspect = c.clientWidth/c.clientHeight; camera.updateProjectionMatrix();
+  camera.aspect = c.clientWidth/c.clientHeight; 
+  camera.updateProjectionMatrix();
   renderer.setSize(c.clientWidth, c.clientHeight);
 };
 </script>
